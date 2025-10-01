@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfcpqwmgld3h8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_byeqb"]
+albedo_color = Color(0.717647, 0.313726, 0.156863, 1)
+metallic_specular = 0.52
+roughness = 0.09
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g1buu"]
+albedo_color = Color(0.682353, 0.207843, 0.145098, 1)
+metallic_specular = 0.28
+roughness = 0.52
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_byeqb"]
+size = Vector3(1, 0.0744629, 1)
+
+[node name="Cazuela" type="AnimatableBody3D"]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.068622, 0)
+height = 0.2
+sides = 32
+material = SubResource("StandardMaterial3D_byeqb")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0639296, 0)
+operation = 2
+radius = 0.459473
+height = 0.314697
+sides = 32
+material = SubResource("StandardMaterial3D_g1buu")
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.184209, 0)
+inner_radius = 0.45
+outer_radius = 0.51
+sides = 32
+material = SubResource("StandardMaterial3D_g1buu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_byeqb")
