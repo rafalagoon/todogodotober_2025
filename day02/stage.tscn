@@ -1,0 +1,303 @@
+[gd_scene load_steps=24 format=3 uid="uid://ctmc7dsmhj8ii"]
+
+[ext_resource type="Script" uid="uid://dylnq1tilbwkc" path="res://stage.gd" id="1_1edn8"]
+[ext_resource type="PackedScene" uid="uid://cvywsd2ghyivp" path="res://pipe.tscn" id="1_6eo5e"]
+[ext_resource type="Script" uid="uid://brpqbcgilltng" path="res://water_level.gd" id="2_g8oy1"]
+[ext_resource type="Script" uid="uid://b8kwqmqd1koc4" path="res://addons/Basic FPS Player/Src/basic_player_startup.gd" id="2_rnkuw"]
+[ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="3_gx6sy"]
+[ext_resource type="Texture2D" uid="uid://b24lcrlm57rdn" path="res://icon.svg" id="4_16g40"]
+[ext_resource type="PackedScene" uid="uid://nou7rogxauiv" path="res://wrench.tscn" id="4_gx6sy"]
+[ext_resource type="Script" uid="uid://c2n32ksr580x6" path="res://level_manager.gd" id="6_jx6rg"]
+[ext_resource type="PackedScene" uid="uid://bk46pkwfkalf7" path="res://pipe_union.tscn" id="6_vpggq"]
+[ext_resource type="Script" uid="uid://d2p2rn2ap4yqk" path="res://level.gd" id="7_g8oy1"]
+[ext_resource type="Script" uid="uid://q8tbr85peh5p" path="res://ui.gd" id="11_i76fu"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6eo5e"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_aees8"]
+sky_material = SubResource("ProceduralSkyMaterial_6eo5e")
+
+[sub_resource type="Environment" id="Environment_rnkuw"]
+background_mode = 2
+sky = SubResource("Sky_aees8")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6eo5e"]
+albedo_color = Color(1, 0.72549, 0.52549, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x1kum"]
+material = SubResource("StandardMaterial3D_6eo5e")
+size = Vector3(24, 12, 0.1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_aees8"]
+data = PackedVector3Array(-12, 6, 0.05, 12, 6, 0.05, -12, -6, 0.05, 12, 6, 0.05, 12, -6, 0.05, -12, -6, 0.05, 12, 6, -0.05, -12, 6, -0.05, 12, -6, -0.05, -12, 6, -0.05, -12, -6, -0.05, 12, -6, -0.05, 12, 6, 0.05, 12, 6, -0.05, 12, -6, 0.05, 12, 6, -0.05, 12, -6, -0.05, 12, -6, 0.05, -12, 6, -0.05, -12, 6, 0.05, -12, -6, -0.05, -12, 6, 0.05, -12, -6, 0.05, -12, -6, -0.05, 12, 6, 0.05, -12, 6, 0.05, 12, 6, -0.05, -12, 6, 0.05, -12, 6, -0.05, 12, 6, -0.05, -12, -6, 0.05, 12, -6, 0.05, -12, -6, -0.05, 12, -6, 0.05, 12, -6, -0.05, -12, -6, -0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i76fu"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0, 0.623529, 0.898039, 0.635294)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jx6rg"]
+material = SubResource("StandardMaterial3D_i76fu")
+size = Vector3(24, 9, 28.505)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aees8"]
+albedo_color = Color(0.336608, 0.336608, 0.336608, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6eo5e"]
+material = SubResource("StandardMaterial3D_aees8")
+size = Vector3(24, 30, 0.1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6eo5e"]
+data = PackedVector3Array(-12, 15, 0.05, 12, 15, 0.05, -12, -15, 0.05, 12, 15, 0.05, 12, -15, 0.05, -12, -15, 0.05, 12, 15, -0.05, -12, 15, -0.05, 12, -15, -0.05, -12, 15, -0.05, -12, -15, -0.05, 12, -15, -0.05, 12, 15, 0.05, 12, 15, -0.05, 12, -15, 0.05, 12, 15, -0.05, 12, -15, -0.05, 12, -15, 0.05, -12, 15, -0.05, -12, 15, 0.05, -12, -15, -0.05, -12, 15, 0.05, -12, -15, 0.05, -12, -15, -0.05, 12, 15, 0.05, -12, 15, 0.05, 12, 15, -0.05, -12, 15, 0.05, -12, 15, -0.05, 12, 15, -0.05, -12, -15, 0.05, 12, -15, 0.05, -12, -15, -0.05, 12, -15, 0.05, 12, -15, -0.05, -12, -15, -0.05)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6eo5e"]
+radius = 2.0
+height = 8.0
+
+[node name="Stage" type="Node3D"]
+script = ExtResource("1_1edn8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.896517, -0.362323, 0.254909, 0.304029, -0.084693, 0.948891, -0.322216, 0.928197, 0.186086, 0, 12.8932, 5.54721)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rnkuw")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.964787, -0.0479336, 0.258628, 0, 0.983255, 0.182235, -0.263032, -0.175818, 0.948632, 4.36071, 7.2577, 11.0428)
+
+[node name="Wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+mesh = SubResource("BoxMesh_x1kum")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_aees8")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 29)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_aees8")
+
+[node name="WaterLevel" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.000325203)
+script = ExtResource("2_g8oy1")
+
+[node name="Water" type="MeshInstance3D" parent="WaterLevel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, 14.5668)
+mesh = SubResource("BoxMesh_jx6rg")
+skeleton = NodePath("../..")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 14)
+mesh = SubResource("BoxMesh_6eo5e")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_6eo5e")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Floor"]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, -4.37114e-08, 1, 4.37114e-08, 1, 4.37114e-08, -4.37114e-08, -12, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_6eo5e")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="Floor"]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, -4.37114e-08, 1, 4.37114e-08, 1, 4.37114e-08, -4.37114e-08, 12, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D3"]
+shape = SubResource("ConcavePolygonShape3D_6eo5e")
+
+[node name="Basic FPS Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.09791, 9.13744)
+script = ExtResource("2_rnkuw")
+SPEED = 8.0
+JUMP_VELOCITY = 0.0
+metadata/_custom_type_script = "uid://b8kwqmqd1koc4"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Basic FPS Player"]
+shape = SubResource("CapsuleShape3D_6eo5e")
+
+[node name="Head" parent="Basic FPS Player" instance=ExtResource("3_gx6sy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.90644, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Basic FPS Player/Head/Camera3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.363219)
+texture = ExtResource("4_16g40")
+region_enabled = true
+region_rect = Rect2(62, 64, 1, 1)
+
+[node name="Hand" type="Marker3D" parent="Basic FPS Player/Head"]
+transform = Transform3D(1, 0, 0, 0, 0.940774, 0.339033, 0, -0.339033, 0.940774, 0.981836, -0.207471, -1.54559)
+
+[node name="Wrench" parent="Basic FPS Player/Head/Hand" instance=ExtResource("4_gx6sy")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="Basic FPS Player/Head"]
+target_position = Vector3(0, 0, -4)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="LevelManager" type="Node3D" parent="."]
+script = ExtResource("6_jx6rg")
+
+[node name="Level1" type="Node3D" parent="LevelManager"]
+visible = false
+script = ExtResource("7_g8oy1")
+
+[node name="Pipe" parent="LevelManager/Level1" instance=ExtResource("1_6eo5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.38142, 1)
+
+[node name="PipeUnion" parent="LevelManager/Level1/Pipe" instance=ExtResource("6_vpggq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.108199, 0)
+force_emitting = true
+opening_size = 1
+
+[node name="Pipe2" parent="LevelManager/Level1" instance=ExtResource("1_6eo5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.38142, 1)
+
+[node name="Pipe4" parent="LevelManager/Level1" instance=ExtResource("1_6eo5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.38142, 1)
+
+[node name="Pipe3" parent="LevelManager/Level1" instance=ExtResource("1_6eo5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.618578, 1)
+
+[node name="Pipe5" parent="LevelManager/Level1" instance=ExtResource("1_6eo5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.3814, 1)
+
+[node name="Level2" type="Node3D" parent="LevelManager"]
+visible = false
+script = ExtResource("7_g8oy1")
+
+[node name="Pipe" parent="LevelManager/Level2" instance=ExtResource("1_6eo5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.09665, 5.38142, 1)
+
+[node name="PipeUnion" parent="LevelManager/Level2/Pipe" instance=ExtResource("6_vpggq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.28474, 0)
+force_emitting = true
+opening_size = 2
+
+[node name="Pipe2" parent="LevelManager/Level2" instance=ExtResource("1_6eo5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.09665, 2.38142, 1)
+
+[node name="Pipe4" parent="LevelManager/Level2" instance=ExtResource("1_6eo5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.09665, 8.38142, 1)
+
+[node name="Pipe3" parent="LevelManager/Level2" instance=ExtResource("1_6eo5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.09665, -0.618578, 1)
+
+[node name="Pipe5" parent="LevelManager/Level2" instance=ExtResource("1_6eo5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.09665, 11.3814, 1)
+
+[node name="Level3" type="Node3D" parent="LevelManager"]
+script = ExtResource("7_g8oy1")
+
+[node name="Pipe" parent="LevelManager/Level3" instance=ExtResource("1_6eo5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.51392, 5.38142, 1)
+
+[node name="PipeUnion" parent="LevelManager/Level3/Pipe" instance=ExtResource("6_vpggq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.28474, 0)
+force_emitting = true
+opening_size = 4
+
+[node name="PipeUnion2" parent="LevelManager/Level3/Pipe" instance=ExtResource("6_vpggq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.11107, 0)
+force_emitting = true
+opening_size = 3
+
+[node name="Pipe2" parent="LevelManager/Level3" instance=ExtResource("1_6eo5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.51392, 2.38142, 1)
+
+[node name="Pipe4" parent="LevelManager/Level3" instance=ExtResource("1_6eo5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.51392, 8.38142, 1)
+
+[node name="Pipe3" parent="LevelManager/Level3" instance=ExtResource("1_6eo5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.51392, -0.618578, 1)
+
+[node name="Pipe5" parent="LevelManager/Level3" instance=ExtResource("1_6eo5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.51392, 11.3814, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_i76fu")
+
+[node name="GameOver" type="RichTextLabel" parent="CanvasLayer/UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -223.0
+offset_right = 500.0
+offset_bottom = 303.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/bold_font_size = 128
+bbcode_enabled = true
+horizontal_alignment = 1
+
+[node name="ExitButton" type="Button" parent="CanvasLayer/UI/GameOver"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -67.0
+offset_top = -149.0
+offset_right = 67.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Exit"
+
+[node name="WaterLevel" type="Label" parent="CanvasLayer/UI"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "0"
+
+[node name="Score" type="Label" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -86.0
+offset_right = 86.0
+offset_bottom = 63.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = "Score: 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pipe_screwed" from="." to="." method="_on_pipe_screwed"]
+[connection signal="game_over" from="WaterLevel" to="." method="_on_water_level_game_over"]
+[connection signal="pipe_selected" from="Basic FPS Player" to="." method="_on_pipe_selected"]
+[connection signal="game_over" from="LevelManager" to="." method="_on_game_over"]
+[connection signal="level_openings" from="LevelManager" to="WaterLevel" method="_on_level_manager_level_openings"]
+[connection signal="opening_closed" from="LevelManager" to="WaterLevel" method="_on_level_manager_opening_closed"]
+[connection signal="pressed" from="CanvasLayer/UI/GameOver/ExitButton" to="." method="_on_exit_button_pressed"]
+
+[editable path="Basic FPS Player/Head"]

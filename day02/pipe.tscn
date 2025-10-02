@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvywsd2ghyivp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_78010"]
+albedo_color = Color(0.287382, 0.594326, 0.287386, 1)
+metallic = 0.88
+roughness = 0.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bepn3"]
+material = SubResource("StandardMaterial3D_78010")
+top_radius = 0.35
+bottom_radius = 0.35
+height = 3.0
+radial_segments = 12
+rings = 1
+
+[node name="Pipe" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_bepn3")

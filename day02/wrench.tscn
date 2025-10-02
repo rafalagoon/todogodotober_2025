@@ -1,0 +1,118 @@
+[gd_scene load_steps=9 format=3 uid="uid://nou7rogxauiv"]
+
+[ext_resource type="Script" uid="uid://cwg44ntbfky0e" path="res://wrench.gd" id="1_objai"]
+[ext_resource type="AudioStream" uid="uid://cu7wb8mqv8pmy" path="res://wrenching01.ogg" id="2_4x08j"]
+[ext_resource type="AudioStream" uid="uid://dpmvmj36oydqf" path="res://wrenching02.ogg" id="3_e3hmi"]
+[ext_resource type="AudioStream" uid="uid://b36htypb5f4xh" path="res://wrenching03.ogg" id="4_67hgd"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hhalc"]
+random_pitch = 1.1
+streams_count = 3
+stream_0/stream = ExtResource("2_4x08j")
+stream_1/stream = ExtResource("3_e3hmi")
+stream_2/stream = ExtResource("4_67hgd")
+
+[sub_resource type="Animation" id="Animation_objai"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_28otn"]
+resource_name = "screw"
+length = 1.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.7, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.608771), Vector3(0, 0, -0.168453), Vector3(0, 0, 0.608771), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bqspc"]
+_data = {
+&"RESET": SubResource("Animation_objai"),
+&"screw": SubResource("Animation_28otn")
+}
+
+[node name="Wrench" type="Node3D"]
+script = ExtResource("1_objai")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="HeadTop" type="CSGCylinder3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+height = 0.2
+sides = 32
+
+[node name="Profile" type="CSGCylinder3D" parent="Pivot/HeadTop"]
+transform = Transform3D(0.803504, -3.5154e-08, -0.930914, 4.75274e-08, 1, -2.05263e-08, 1.0873, -1.77329e-08, 0.687936, -0.129614, -6.82981e-09, -0.156248)
+operation = 2
+radius = 0.373047
+height = 0.3
+sides = 5
+
+[node name="Shaft" type="CSGBox3D" parent="Pivot"]
+transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 0.833947, -1.4112, 0)
+size = Vector3(0.4, 2.5, 0.2)
+
+[node name="HeadBottom" type="CSGCylinder3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.60676, -2.75241, 0)
+radius = 0.4
+height = 0.2
+sides = 32
+
+[node name="Profile" type="CSGCylinder3D" parent="Pivot/HeadBottom"]
+transform = Transform3D(0.991952, 5.5345e-09, 0.126614, -5.5345e-09, 1, -3.5179e-10, -0.126614, -3.5179e-10, 0.991952, 0, 0, 0)
+operation = 2
+radius = 0.28
+height = 0.3
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_hhalc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bqspc")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
