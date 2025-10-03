@@ -1,0 +1,97 @@
+[gd_scene load_steps=11 format=3 uid="uid://c7th5apedkmbm"]
+
+[ext_resource type="Script" uid="uid://v018rtrgb26v" path="res://tnt_fake.gd" id="1_8pt2j"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hbx1b"]
+albedo_color = Color(1, 0.117647, 0.0392157, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hbx1b"]
+material = SubResource("StandardMaterial3D_hbx1b")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pt2j"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_aixsj"]
+material = SubResource("StandardMaterial3D_8pt2j")
+top_radius = 0.165
+bottom_radius = 0.165
+height = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aixsj"]
+albedo_color = Color(0.355314, 0.355314, 0.355314, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nlvnv"]
+material = SubResource("StandardMaterial3D_aixsj")
+top_radius = 0.025
+bottom_radius = 0.025
+height = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nlvnv"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_giohf"]
+material = SubResource("StandardMaterial3D_nlvnv")
+radius = 0.025
+height = 0.075
+radial_segments = 16
+rings = 8
+
+[sub_resource type="Gradient" id="Gradient_sdnf8"]
+colors = PackedColorArray(0.921569, 0.929412, 0, 1, 0.566693, 0.084458, 0, 1)
+
+[node name="TNTFake" type="Node3D"]
+script = ExtResource("1_8pt2j")
+
+[node name="Cartridge1" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_hbx1b")
+
+[node name="Cartridge4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.102567, 0, 0)
+mesh = SubResource("CylinderMesh_hbx1b")
+
+[node name="Cartridge5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.104466, 0, 0)
+mesh = SubResource("CylinderMesh_hbx1b")
+
+[node name="Cartridge6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0778749, 0, -0.0797743)
+mesh = SubResource("CylinderMesh_hbx1b")
+
+[node name="Cartridge9" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.078, 0, 0.08)
+mesh = SubResource("CylinderMesh_hbx1b")
+
+[node name="Cartridge7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.078, 0, -0.08)
+mesh = SubResource("CylinderMesh_hbx1b")
+
+[node name="Cartridge8" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.078, 0, 0.08)
+mesh = SubResource("CylinderMesh_hbx1b")
+
+[node name="Cartridge2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.104466)
+mesh = SubResource("CylinderMesh_hbx1b")
+
+[node name="Cartridge3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.102567)
+mesh = SubResource("CylinderMesh_hbx1b")
+
+[node name="Label" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_aixsj")
+
+[node name="Fuse" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.266371, 0)
+mesh = SubResource("CylinderMesh_nlvnv")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Fuse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.116758, 0)
+amount = 32
+lifetime = 2.0
+mesh = SubResource("SphereMesh_giohf")
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, 1, 0)
+color_ramp = SubResource("Gradient_sdnf8")

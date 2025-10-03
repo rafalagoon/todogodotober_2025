@@ -1,0 +1,141 @@
+[gd_scene load_steps=17 format=3 uid="uid://basq8aipdty25"]
+
+[ext_resource type="Script" uid="uid://wu1g04p2j6mw" path="res://water.gd" id="1_6eo5e"]
+[ext_resource type="Script" uid="uid://8pqitmbujhpc" path="res://stage.gd" id="1_vsjsl"]
+[ext_resource type="Script" uid="uid://y3xaudar3pra" path="res://addons/Basic FPS Player/Src/basic_player_startup.gd" id="2_rnkuw"]
+[ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="3_gx6sy"]
+[ext_resource type="PackedScene" uid="uid://c7th5apedkmbm" path="res://tnt_fake.tscn" id="4_gx6sy"]
+[ext_resource type="Script" uid="uid://cbx174hggmiwe" path="res://ui.gd" id="5_16g40"]
+[ext_resource type="AudioStream" uid="uid://b3lvwf31vcmsh" path="res://aquarium-sound-6891.mp3" id="6_vpggq"]
+[ext_resource type="AudioStream" uid="uid://b52fp054mb5ik" path="res://collect-points-190037.mp3" id="7_1edn8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6eo5e"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_aees8"]
+sky_material = SubResource("ProceduralSkyMaterial_6eo5e")
+
+[sub_resource type="Environment" id="Environment_rnkuw"]
+background_mode = 2
+sky = SubResource("Sky_aees8")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x1kum"]
+albedo_color = Color(0, 0.637878, 0.638023, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6eo5e"]
+transparency = 1
+albedo_color = Color(0, 0.580392, 0.831373, 0.431373)
+
+[sub_resource type="BoxMesh" id="BoxMesh_aees8"]
+material = SubResource("StandardMaterial3D_6eo5e")
+size = Vector3(32, 21, 32)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_16g40"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_jx6rg"]
+
+[node name="Stage" type="Node3D"]
+script = ExtResource("1_vsjsl")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rnkuw")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+collision_layer = 17
+collision_mask = 17
+
+[node name="Lagoon" type="CSGBox3D" parent="CSGCombiner3D"]
+size = Vector3(44, 30, 44)
+
+[node name="Hole" type="CSGBox3D" parent="CSGCombiner3D/Lagoon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.63241, 0)
+operation = 2
+size = Vector3(32, 22, 32)
+material = SubResource("StandardMaterial3D_x1kum")
+
+[node name="Water" type="MeshInstance3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.2562, 0)
+mesh = SubResource("BoxMesh_aees8")
+script = ExtResource("1_6eo5e")
+fish_num = 128
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CSGCombiner3D/Water"]
+stream = ExtResource("6_vpggq")
+volume_db = -9.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.748957, -0.434718, 0.500084, 0, 0.754709, 0.65606, -0.662619, -0.491361, 0.565244, 13.7304, 21.4745, 15.9892)
+
+[node name="DirectionAxisTimer" type="Timer" parent="."]
+
+[node name="Basic FPS Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.9804, 19.4656)
+script = ExtResource("2_rnkuw")
+metadata/_custom_type_script = "uid://y3xaudar3pra"
+
+[node name="Head" parent="Basic FPS Player" instance=ExtResource("3_gx6sy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.692379, 0)
+
+[node name="TNTFake" parent="Basic FPS Player/Head" instance=ExtResource("4_gx6sy")]
+transform = Transform3D(0.897166, -0.441694, 0, 0.416098, 0.845177, 0.335468, -0.148174, -0.30097, 0.942052, 0.399845, -0.259888, -0.704073)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Basic FPS Player"]
+shape = SubResource("CapsuleShape3D_16g40")
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("5_16g40")
+
+[node name="Score" type="RichTextLabel" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/normal_font_size = 256
+bbcode_enabled = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/Score"]
+stream = ExtResource("7_1edn8")
+volume_db = -8.0
+
+[node name="RestartButton" type="Button" parent="UI"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -86.0
+offset_top = -96.0
+offset_right = 86.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Try Again!!!"
+
+[node name="RestartTimer" type="Timer" parent="UI"]
+one_shot = true
+
+[node name="OutBoundsArea3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -18.6342, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OutBoundsArea3D"]
+shape = SubResource("WorldBoundaryShape3D_jx6rg")
+
+[connection signal="add_points" from="CSGCombiner3D/Water" to="UI" method="_on_water_add_points"]
+[connection signal="pressed" from="UI/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="timeout" from="UI/RestartTimer" to="UI" method="_on_restart_timer_timeout"]
+[connection signal="body_entered" from="OutBoundsArea3D" to="." method="_on_out_bounds_area_3d_body_entered"]

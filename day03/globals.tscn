@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://fcue4kj7fb33"]
+
+[ext_resource type="AudioStream" uid="uid://clqjmoikvcet" path="res://Fish_Bomberman.mp3" id="1_f6yec"]
+
+[node name="Globals" type="Node"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_f6yec")
+volume_db = -12.0
+autoplay = true
